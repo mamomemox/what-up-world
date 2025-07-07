@@ -1,7 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head><title>What Up World</title></head>
-<body>
-<h1>Page 1 Placeholder</h1>
+<head>
+  <title>What Up World</title>
+</head>
+<body style="text-align: center; font-family: Arial, sans-serif; background-color: #ffffff; padding-top: 50px;">
+
+  <h1>What’s up in my target market today?</h1>
+
+  <select id="country-select" style="padding: 10px; margin: 20px;">
+    <option value="USA">USA</option>
+    <option value="China">China</option>
+    <option value="Germany">Germany</option>
+  </select>
+
+  <br>
+
+  <button onclick="fetchMarketUpdate()" style="padding: 20px 40px; font-size: 18px; border-radius: 50px; background-color: #E30613; color: white; border: none;">
+    🌍
+  </button>
+
+  <div id="result" style="margin-top: 30px;"></div>
+
+  <script>
+    const backendUrl = "https://what-up-world.onrender.com";
+
+    async function fetchMarketUpdate() {
+      const country = document.getElementById('country-select').value;
+      const response = await fetch(`${backendUrl}/generate?country=${country}`);
+      const data = await response.json();
+
+      document.getElementById('result').innerHTML = `
+        <h2>${data.title}</h2>
+        <p><strong>${data.lead}</strong></p>
+        <img src="${data.image}" alt="Market Image" style="max-width: 80%; border-radius: 10px;">
+        <div style="text-align: left; margin-top: 20px;">
+          ${data.insights.map(insight => `<h3>${insight.subtitle}</h3><p>${insight.content}</p>`).join('')}
+        </div>
+      `;
+    }
+  </script>
+
 </body>
 </html>
