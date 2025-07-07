@@ -1,4 +1,4 @@
-const backendUrl = "https://what-up-world.onrender.com";
+const backendUrl = "https://what-up-world-1.onrender.com";
 
 async function fetchMarketUpdate() {
   const country = document.getElementById('country-select').value;
