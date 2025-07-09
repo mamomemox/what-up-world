@@ -1,32 +1,58 @@
-<body onload="loadInsights()">
+<!-- page2.html (Page 2) -->
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Work+Sans:wght@400;500;700;900"
+    />
+    <title>Market Insights</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="bg-white font-['Work Sans','Noto Sans',sans-serif]">
+    <div class="min-h-screen flex flex-col justify-between">
+      <div>
+        <div class="flex justify-end p-4">
+          <button onclick="window.history.back()" class="text-[#181111] font-bold rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z" />
+            </svg>
+          </button>
+        </div>
+        <div id="insights-container" class="p-4">
+          <h1 class="text-[#181111] text-[22px] font-bold mb-2">Loading insights...</h1>
+        </div>
+      </div>
+      <div class="border-t border-[#f5f0f0] flex justify-around py-3">
+        <button class="bg-[#f5f0f0] text-[#181111] rounded-lg px-4 py-2 font-bold">Share</button>
+        <button class="bg-[#f20c0c] text-white rounded-lg px-4 py-2 font-bold">Download PDF</button>
+      </div>
+    </div>
 
-  <h1>Market Insights</h1>
-  <div id="insights-container">
-    <p>Loading insights...</p>
-  </div>
-
-  <script>
-    async function loadInsights() {
+    <script>
       const params = new URLSearchParams(window.location.search);
       const country = params.get('country');
-      if (!country) {
-        document.getElementById('insights-container').innerHTML = "No country selected.";
-        return;
-      }
+      const container = document.getElementById('insights-container');
 
-      const response = await fetch(`https://your-backend-url.com/api/generate?country=${encodeURIComponent(country)}`);
-      const data = await response.json();
+      fetch(`/api/generate?country=${country}`)
+        .then(response => response.json())
+        .then(data => {
+          container.innerHTML = `
+            <h1 class="text-[#181111] text-[22px] font-bold mb-2">${data.title}</h1>
+            <p class="text-[#181111] mb-4">${data.lead}</p>
 
-      if (data.result) {
-        const sections = data.result.split(/\n(?=\d\.)/g);  // Splits on "1." "2." "3."
-        document.getElementById('insights-container').innerHTML = `
-          <h2>Overview Market</h2><p>${sections[0]?.replace(/^1\.\s*/, '')}</p>
-          <h2>Latest News</h2><p>${sections[1]?.replace(/^2\.\s*/, '')}</p>
-          <h2>Export Opportunities</h2><p>${sections[2]?.replace(/^3\.\s*/, '')}</p>
-        `;
-      } else {
-        document.getElementById('insights-container').innerHTML = `<p>Error: ${data.error || "Failed to load insights."}</p>`;
-      }
-    }
-  </script>
-</body>
+            <h3 class="text-lg font-bold text-[#181111] mb-1">Latest News</h3>
+            <p class="mb-3">${data.latest_news}</p>
+
+            <h3 class="text-lg font-bold text-[#181111] mb-1">Regulation Snapshot</h3>
+            <p class="mb-3">${data.regulation}</p>
+
+            <h3 class="text-lg font-bold text-[#181111] mb-1">Opportunity Highlight</h3>
+            <p class="mb-3">${data.opportunity}</p>
+          `;
+        });
+    </script>
+  </body>
+</html>
