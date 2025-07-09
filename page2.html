@@ -1,43 +1,16 @@
-<!-- page2.html (Page 2) -->
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap">
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <title>Market Insights</title>
-</head>
-<body class="bg-white font-['Work_Sans','Noto_Sans',sans-serif] min-h-screen flex flex-col justify-between">
-  <div>
-    <div class="flex items-center justify-end p-4">
-      <button class="rounded-lg p-3 text-[#181111]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-          <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31..." />
-        </svg>
-      </button>
+<body>
+  <div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden">
+    <!-- Header etc. -->
+
+    <div id="insights-container" class="px-4 py-6 text-[#181111]">
+      <!-- AI content will be injected here -->
     </div>
 
-    <h1 id="reportTitle" class="text-[#181111] text-[22px] font-bold px-4 pt-5 pb-2"></h1>
-    <p id="reportLead" class="text-[#181111] text-base px-4 pb-4"></p>
-
-    <div class="p-4">
-      <div class="rounded-lg aspect-[3/2] bg-cover bg-center" id="reportImage"></div>
+    <div class="flex justify-stretch px-4 py-3">
+      <button class="rounded-lg h-10 px-4 bg-[#f5f0f0] text-[#181111]">Share</button>
+      <button class="rounded-lg h-10 px-4 bg-[#f20c0c] text-white">Download PDF</button>
     </div>
-
-    <h3 class="text-[#181111] text-lg font-bold px-4 pb-2 pt-4">Latest News</h3>
-    <p id="latestNews" class="text-[#181111] text-base px-4"></p>
-
-    <h3 class="text-[#181111] text-lg font-bold px-4 pb-2 pt-4">Regulation Snapshot</h3>
-    <p id="regulation" class="text-[#181111] text-base px-4"></p>
-
-    <h3 class="text-[#181111] text-lg font-bold px-4 pb-2 pt-4">Opportunity Highlight</h3>
-    <p id="opportunity" class="text-[#181111] text-base px-4"></p>
   </div>
 
-  <div class="flex justify-between px-4 py-3">
-    <button class="rounded-lg bg-[#f5f0f0] text-[#181111] px-4 py-2 text-sm font-bold">Share</button>
-    <button class="rounded-lg bg-[#f20c0c] text-white px-4 py-2 text-sm font-bold">Download PDF</button>
-  </div>
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
-</html>
