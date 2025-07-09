@@ -1,61 +1,69 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>What's Up World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What's Up World - Home</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
+  <body class="bg-[#131712] font-sans text-white min-h-screen flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-end p-4 pb-2">
+        <div class="w-12">
+          <button class="h-12 w-12 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31..."/>
+            </svg>
+          </button>
+        </div>
+      </div>
 
-  <body class="bg-[#131712] text-white font-sans min-h-screen flex flex-col justify-between">
-    <div class="p-4 pb-2 flex justify-end">
-      <div class="w-12 flex items-center justify-end">
-        <button class="text-white" onclick="window.location.href='https://your-home-url.com'">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-            <path
-              d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
-            ></path>
-          </svg>
+      <h3 class="text-2xl font-bold text-center pb-2 pt-5 px-4">What's up in my target market today?</h3>
+
+      <div class="px-4 py-3 flex justify-center">
+        <button onclick="handleExplore()" class="h-12 px-5 rounded-full bg-[#50d22c] text-[#131712] font-bold">
+          Click to Explore
         </button>
+      </div>
+
+      <div class="max-w-[480px] px-4 py-3">
+        <label class="block">
+          <select id="country-select" class="w-full h-14 rounded-xl border border-[#42513e] bg-[#1f251d] text-white p-3">
+            <option value="">Select Country</option>
+            <option value="Germany">Germany</option>
+            <option value="USA">USA</option>
+            <option value="China">China</option>
+          </select>
+        </label>
       </div>
     </div>
 
-    <h3 class="text-2xl font-bold text-center px-4 pb-2 pt-5">What's up in my target market today?</h3>
-
-    <div class="px-4 py-3 flex justify-center">
-      <button
-        onclick="navigateToPage2()"
-        class="rounded-full h-12 px-5 bg-[#50d22c] text-[#131712] text-base font-bold"
-      >
-        Click to Explore
-      </button>
-    </div>
-
-    <div class="px-4 py-3 flex flex-wrap gap-4">
-      <label class="flex flex-col flex-1 min-w-40">
-        <select id="country-select" class="form-input rounded-xl h-14 border border-[#42513e] bg-[#1f251d] text-white p-[15px]">
-          <option value="Germany">Germany</option>
-          <option value="USA">USA</option>
-          <option value="China">China</option>
-        </select>
-      </label>
-    </div>
-
-    <div class="border-t border-[#2d372a] bg-[#1f251d] px-4 py-3 flex justify-between">
-      <div class="text-white">Menu Placeholder</div>
+    <div>
+      <div class="flex gap-2 border-t border-[#2d372a] bg-[#1f251d] px-4 pb-3 pt-2">
+        <a class="flex-1 flex flex-col items-center" href="#">
+          <svg class="h-8" viewBox="0 0 256 256" fill="currentColor"><path d="M224,115.55V208..."/></svg>
+        </a>
+        <a class="flex-1 flex flex-col items-center text-[#a5b6a0]" href="#">
+          <svg class="h-8" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,218.34l-50.07..."/></svg>
+        </a>
+        <a class="flex-1 flex flex-col items-center text-[#a5b6a0]" href="#">
+          <svg class="h-8" viewBox="0 0 256 256" fill="currentColor"><path d="M230.92,212c-15.23..."/></svg>
+        </a>
+      </div>
+      <div class="h-5 bg-[#1f251d]"></div>
     </div>
 
     <script>
-      function navigateToPage2() {
+      function handleExplore() {
         const country = document.getElementById('country-select').value;
-        localStorage.setItem('selectedCountry', country);
-        window.location.href = 'page2.html';
+        if (country) {
+          window.location.href = `page2.html?country=${encodeURIComponent(country)}`;
+        } else {
+          alert('Please select a country.');
+        }
       }
     </script>
   </body>
