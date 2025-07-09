@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Up World</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900">
+</head>
+<body>
+    <div class="app-container">
+        <div class="top-bar">
+            <button class="close-button">X</button>
+        </div>
+        <h3 class="title">What's up in my target market today?</h3>
+        <div class="explore-button-container">
+            <button class="explore-button" onclick="generateReport()">Click to Explore</button>
+        </div>
+        <div class="country-select-container">
+            <label>
+                <select id="countrySelect">
+                    <option value="">Select Country</option>
+                    <option value="Germany">Germany</option>
+                    <option value="USA">USA</option>
+                    <option value="China">China</option>
+                </select>
+            </label>
+        </div>
+
+        <div id="reportSection" class="report-section hidden">
+            <h1>Market Insights</h1>
+            <p id="overviewText"></p>
+            <h2>Overview Market</h2>
+            <p id="marketText"></p>
+            <h2>Latest News</h2>
+            <p id="newsText"></p>
+            <h2>Export Opportunities</h2>
+            <p id="exportText"></p>
+
+            <div class="actions">
+                <button onclick="shareReport()">Share</button>
+                <button onclick="downloadPDF()">Download PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

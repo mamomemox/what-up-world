@@ -1,0 +1,78 @@
+
+body {
+    margin: 0;
+    font-family: Manrope, 'Noto Sans', sans-serif;
+    background-color: #131712;
+    color: white;
+}
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.top-bar {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+.close-button {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+}
+.title {
+    text-align: center;
+    padding-top: 1rem;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+.explore-button-container, .country-select-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+.explore-button {
+    background-color: #50d22c;
+    color: #131712;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+}
+.country-select-container select {
+    background-color: #1f251d;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid #42513e;
+}
+.report-section {
+    padding: 1rem;
+}
+.report-section.hidden {
+    display: none;
+}
+.report-section h1, .report-section h2 {
+    font-weight: bold;
+}
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.actions button {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: bold;
+}
+.actions button:first-child {
+    background-color: #2e352c;
+    color: white;
+}
+.actions button:last-child {
+    background-color: #8cd279;
+    color: #131612;
+}
