@@ -1,28 +1,39 @@
-// script.js (Shared by both pages)
-const exploreBtn = document.getElementById('exploreBtn');
-if (exploreBtn) {
-  exploreBtn.addEventListener('click', () => {
-    const country = document.getElementById('countrySelect').value;
-    if (country) {
-      localStorage.setItem('selectedCountry', country);
-      window.location.href = 'page2.html';
-    } else {
-      alert('Please select a country.');
-    }
-  });
-}
+// Page 1: Handle button click
+document.addEventListener('DOMContentLoaded', () => {
+  const exploreButton = document.getElementById('exploreButton');
+  const countrySelect = document.getElementById('countrySelect');
 
-window.addEventListener('DOMContentLoaded', async () => {
-  const country = localStorage.getItem('selectedCountry');
-  if (!country) return;
+  if (exploreButton && countrySelect) {
+    exploreButton.addEventListener('click', () => {
+      const selectedCountry = countrySelect.value;
+      if (!selectedCountry) {
+        alert('Please select a country.');
+        return;
+      }
+      window.location.href = `page2.html?country=${encodeURIComponent(selectedCountry)}`;
+    });
+  }
 
-  const response = await fetch(`/api/generate?country=${encodeURIComponent(country)}`);
-  const data = await response.json();
+  // Page 2: Fetch and display AI content
+  const insightsContainer = document.getElementById('insights-container');
+  const urlParams = new URLSearchParams(window.location.search);
+  const country = urlParams.get('country');
 
-  document.getElementById('reportTitle').innerText = data.title || '';
-  document.getElementById('reportLead').innerText = data.lead || '';
-  document.getElementById('latestNews').innerText = data.latest_news || '';
-  document.getElementById('regulation').innerText = data.regulation || '';
-  document.getElementById('opportunity').innerText = data.opportunity || '';
-  document.getElementById('reportImage').style.backgroundImage = `url('https://source.unsplash.com/featured/?${country}')`;
+  if (insightsContainer && country) {
+    insightsContainer.innerHTML = `<p class="text-gray-500 text-center">Loading insights for ${country}...</p>`;
+
+    fetch(`/api/generate?country=${country}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.content) {
+          insightsContainer.innerHTML = data.content;
+        } else {
+          insightsContainer.innerHTML = `<p class="text-red-500">Failed to load insights.</p>`;
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        insightsContainer.innerHTML = `<p class="text-red-500">Failed to load insights.</p>`;
+      });
+  }
 });
