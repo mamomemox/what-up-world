@@ -1,47 +1,70 @@
-<!-- Page 1: Mobile-Optimized Version -->
 <html>
   <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700;900&display=swap" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Work+Sans:wght@400;500;700;900"
+    />
     <title>Market Explorer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   </head>
-  <body class="bg-white font-['Work_Sans']">
-    <div class="min-h-screen flex flex-col justify-between">
 
-      <header class="flex justify-end p-4">
-        <button class="text-[#181111]">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-            <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/>
-          </svg>
-        </button>
-      </header>
+  <body class="bg-white font-['Work Sans','Noto Sans',sans-serif] min-h-screen flex flex-col justify-between">
+    <div>
+      <div class="flex items-center justify-end p-4 pb-2">
+        <div class="w-12 flex justify-end">
+          <button class="h-12 w-12 flex items-center justify-center rounded-lg bg-transparent text-[#181111]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
 
-      <main class="px-4">
-        <h1 class="text-[#181111] text-xl sm:text-2xl font-bold text-center mb-3">What's up in my target market today?</h1>
+      <h1 class="text-[#181111] text-[22px] font-bold leading-tight tracking-[-0.015em] text-center px-4 pt-5 pb-3">
+        What's up in my target market today?
+      </h1>
 
-        <button class="w-full sm:w-auto bg-[#f20c0c] text-white text-base font-semibold rounded-lg py-3 mb-4">
+      <!-- ✅ Just the Button Here -->
+      <div class="flex justify-center px-4 py-5">
+        <button
+          id="explore-button"
+          class="bg-[#f20c0c] text-white font-bold rounded-lg h-12 px-6 text-base tracking-[0.015em] shadow-lg"
+          onclick="location.href='page2.html';"
+        >
           Click to Explore
         </button>
+      </div>
 
-        <select class="w-full border border-[#e6dbdb] rounded-lg p-3 text-[#181111]">
-          <option value="">Select Country</option>
-          <option value="germany">Germany</option>
-          <option value="usa">USA</option>
-          <option value="china">China</option>
-        </select>
-
-        <div class="mt-6">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuABSDXIv_s9fNELf2b2KhG83x0QbXzIWH0DJSb0ilp1GJ97GCAWONDo9xrbSJ63pHgN40ICLF_kmrVY_No2_EtRHySacZijpW13EUeKTIgmUBbRmrDHVHeuA5XLkJY7513XsMOIm_7iUW7I4JNkWsqRW8rqkKjtHUP5hj5tgQ-cqScoSd1VeKDv3Ha7DUDKkNR2dCHErJF8J37HeX6YDiz3310MaW7MAnWp6ZdVZujW6i6eDbGyVDwD6jKAbSavRc1R0z3EOocYYw" alt="Globe" class="w-full rounded-lg object-cover">
-        </div>
-      </main>
-
-      <footer class="border-t border-[#f5f0f0] flex justify-around py-3 text-[#8a6060]">
-        <svg width="24" height="24"><!-- icons --></svg>
-        <svg width="24" height="24"><!-- icons --></svg>
-        <svg width="24" height="24"><!-- icons --></svg>
-      </footer>
-
+      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3 mx-auto">
+        <label class="flex flex-col min-w-40 flex-1">
+          <select
+            id="country-select"
+            class="form-input flex w-full rounded-lg border border-[#e6dbdb] bg-white text-[#181111] h-14 p-[15px] text-base"
+          >
+            <option value="Germany">Germany</option>
+            <option value="USA">USA</option>
+            <option value="China">China</option>
+          </select>
+        </label>
+      </div>
     </div>
+
+    <div>
+      <div class="flex gap-2 border-t border-[#f5f0f0] bg-white px-4 pb-3 pt-2">
+        <!-- icons here (unchanged) -->
+      </div>
+      <div class="h-5 bg-white"></div>
+    </div>
+
+    <script>
+      document.getElementById('explore-button').addEventListener('click', () => {
+        const country = document.getElementById('country-select').value;
+        localStorage.setItem('selectedCountry', country);
+      });
+    </script>
   </body>
 </html>
