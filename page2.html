@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Market Insights</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Manrope:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+
+  <body class="bg-[#131612] text-white font-sans min-h-screen flex flex-col justify-between">
+    <div>
+      <div class="p-4 pb-2 flex justify-end">
+        <div class="w-12 flex items-center justify-end">
+          <button class="text-white" onclick="window.location.href='index.html'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+              <path
+                d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <h1 class="text-[22px] font-bold px-4 pb-3 pt-5">Market Insights</h1>
+      <p class="px-4 text-base pb-3">Stay ahead with AI-powered updates on international markets.</p>
+
+      <div id="insights-container" class="px-4"></div>
+    </div>
+
+    <div class="flex justify-stretch px-4 py-3 gap-3">
+      <button class="rounded-full h-10 px-4 bg-[#2e352c] text-white text-sm font-bold">Share</button>
+      <button class="rounded-full h-10 px-4 bg-[#8cd279] text-[#131612] text-sm font-bold">Download PDF</button>
+    </div>
+
+    <script>
+      async function loadInsights() {
+        const country = localStorage.getItem('selectedCountry') || 'Germany';
+        const response = await fetch(`https://your-backend-url.onrender.com/api/generate?country=${country}`);
+        const data = await response.json();
+
+        const container = document.getElementById('insights-container');
+        container.innerHTML = `
+          <h2 class="text-[22px] font-bold pb-3 pt-5">Overview Market</h2>
+          <p class="pb-3">${data.overview}</p>
+
+          <h2 class="text-[22px] font-bold pb-3 pt-5">Latest News</h2>
+          <p class="pb-3">${data.news}</p>
+
+          <h2 class="text-[22px] font-bold pb-3 pt-5">Export Opportunities</h2>
+          <p class="pb-3">${data.opportunities}</p>
+        `;
+      }
+
+      loadInsights();
+    </script>
+  </body>
+</html>
