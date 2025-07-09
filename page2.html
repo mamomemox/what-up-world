@@ -1,4 +1,4 @@
-<!-- PAGE 2: Updated Design and AI Content Injection -->
+<!-- page2.html (Page 2) -->
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -8,47 +8,24 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Work+Sans:wght@400;500;700;900"
     />
-    <title>Market Insights</title>
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <title>Market Insights Report</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="script.js" defer></script>
   </head>
+  <body class="bg-white font-sans">
+    <div class="min-h-screen flex flex-col justify-between">
 
-  <body class="bg-white font-[Work Sans, Noto Sans, sans-serif] text-[#181111]">
-    <div class="min-h-screen flex flex-col justify-between overflow-x-hidden">
-      <div>
-        <div class="flex items-center p-4 pb-2 justify-end">
-          <button class="rounded-lg h-12 text-[#181111]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128..." />
-            </svg>
-          </button>
+      <div class="p-4">
+        <div id="insights-container">
+          <p class="text-[#181111]">Loading insights...</p>
         </div>
-
-        <h1 id="ai-title" class="text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"></h1>
-        <p id="ai-lead" class="text-base font-normal leading-normal pb-3 pt-1 px-4"></p>
-
-        <div class="w-full p-4">
-          <div id="ai-image" class="rounded-lg bg-cover bg-center h-48"></div>
-        </div>
-
-        <h3 class="text-lg font-bold tracking-[-0.015em] px-4 pb-2 pt-4">Latest News</h3>
-        <p id="ai-news" class="text-base font-normal pb-3 pt-1 px-4"></p>
-
-        <h3 class="text-lg font-bold tracking-[-0.015em] px-4 pb-2 pt-4">Regulation Snapshot</h3>
-        <p id="ai-regulation" class="text-base font-normal pb-3 pt-1 px-4"></p>
-
-        <h3 class="text-lg font-bold tracking-[-0.015em] px-4 pb-2 pt-4">Export Opportunities</h3>
-        <p id="ai-opportunity" class="text-base font-normal pb-3 pt-1 px-4"></p>
       </div>
 
-      <div class="flex justify-between gap-3 px-4 py-3">
-        <button class="rounded-lg h-10 px-4 bg-[#f5f0f0] text-[#181111] text-sm font-bold">Share</button>
-        <button class="rounded-lg h-10 px-4 bg-[#f20c0c] text-white text-sm font-bold">Download PDF</button>
+      <div class="border-t border-[#f5f0f0] bg-white p-4 flex justify-between">
+        <button class="bg-[#f5f0f0] text-[#181111] rounded-lg px-4 py-2 text-sm font-bold">Share</button>
+        <button class="bg-[#f20c0c] text-white rounded-lg px-4 py-2 text-sm font-bold">Download PDF</button>
       </div>
 
-      <div class="h-5"></div>
     </div>
-
-    <script src="script.js"></script>
   </body>
 </html>
