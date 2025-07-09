@@ -1,19 +1,53 @@
-<select id="country-select" ...>
-  <option value="">Select Country</option>
-  <option value="Germany">Germany</option>
-  <option value="France">France</option>
-  <option value="USA">USA</option>
-</select>
-
-<button onclick="goToPage2()">Click to Explore</button>
-
-<script>
-  function goToPage2() {
-    const country = document.getElementById('country-select').value;
-    if (country) {
-      window.location.href = `page2.html?country=${encodeURIComponent(country)}`;
-    } else {
-      alert("Please select a country.");
-    }
-  }
-</script>
+<!-- index.html (Page 1) -->
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Work+Sans:wght@400;500;700;900"
+    />
+    <title>Stitch Design</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body class="bg-white font-['Work Sans','Noto Sans',sans-serif]">
+    <div class="min-h-screen flex flex-col justify-between">
+      <div>
+        <div class="flex justify-end p-4">
+          <button class="text-[#181111] font-bold rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z" />
+            </svg>
+          </button>
+        </div>
+        <h1 class="text-center text-[22px] font-bold text-[#181111] pt-5">What's up in my target market today?</h1>
+        <div class="p-4">
+          <div class="rounded-lg overflow-hidden">
+            <img src="globe.png" alt="Market" class="w-full" />
+          </div>
+        </div>
+        <div class="p-4">
+          <select id="countrySelect" class="border border-[#e6dbdb] text-[#181111] rounded-lg p-3 w-full">
+            <option value="Germany">Germany</option>
+            <option value="USA">USA</option>
+            <option value="China">China</option>
+          </select>
+          <button onclick="explore()" class="mt-4 bg-[#f20c0c] text-white font-bold rounded-lg px-5 py-3 w-full">Click to Explore</button>
+        </div>
+      </div>
+      <div class="border-t border-[#f5f0f0] flex justify-around py-3">
+        <a href="#" class="text-[#8a6060]">Home</a>
+        <a href="#" class="text-[#8a6060]">Search</a>
+        <a href="#" class="text-[#8a6060]">Bookmark</a>
+        <a href="#" class="text-[#8a6060]">Profile</a>
+      </div>
+    </div>
+    <script>
+      function explore() {
+        const country = document.getElementById('countrySelect').value;
+        window.location.href = `/page2.html?country=${encodeURIComponent(country)}`;
+      }
+    </script>
+  </body>
+</html>
