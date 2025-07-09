@@ -1,16 +1,40 @@
-<body>
-  <div class="relative flex size-full min-h-screen flex-col bg-white justify-between group/design-root overflow-x-hidden">
-    <!-- Header etc. -->
+<!-- Page 2: Mobile-Optimized Version -->
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700;900&display=swap" />
+    <title>Market Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white font-['Work_Sans']">
+    <div class="min-h-screen flex flex-col justify-between">
 
-    <div id="insights-container" class="px-4 py-6 text-[#181111]">
-      <!-- AI content will be injected here -->
+      <header class="flex justify-end p-4">
+        <button class="text-[#181111]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/>
+          </svg>
+        </button>
+      </header>
+
+      <main class="px-4">
+        <h1 class="text-[#181111] text-lg sm:text-2xl font-bold mb-2">AI-Generated Market Report</h1>
+        <p class="text-[#181111] text-base mb-4">Dynamic, real-time insights about your chosen market.</p>
+
+        <div class="mb-6">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAytBbF-xm-eVOLSCSHupGgla8pQAdhrsP8uBWt0yOLLl410udY26_N7a60VvYGGkZbuv4f9PgpDgLzDZ69WJ-pys2F4MI67psO4oBOSB4wlHhRKVotC4n6T-Y8-2cC2cyGXI7VvF6XXrAZZaGrkKUfcZP4K2dRy68dcWtAK5fpplFY9DgGqROAc15TKrmIR0T0HayAmtUzr7ZdEL0Afw4_Zmr6PpZbLGRDKxCaiywrOfE18XW_M-XAFhgjTklICAnpvgD0RV6JxQ" class="w-full rounded-lg object-cover">
+        </div>
+
+        <div id="insights-container">
+          <h3 class="text-[#181111] text-lg font-bold mb-2">Loading insights...</h3>
+        </div>
+      </main>
+
+      <footer class="flex justify-between px-4 py-3">
+        <button class="bg-[#f5f0f0] text-[#181111] rounded-lg px-4 py-2 text-sm">Share</button>
+        <button class="bg-[#f20c0c] text-white rounded-lg px-4 py-2 text-sm">Download PDF</button>
+      </footer>
+
     </div>
-
-    <div class="flex justify-stretch px-4 py-3">
-      <button class="rounded-lg h-10 px-4 bg-[#f5f0f0] text-[#181111]">Share</button>
-      <button class="rounded-lg h-10 px-4 bg-[#f20c0c] text-white">Download PDF</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+  </body>
+</html>
