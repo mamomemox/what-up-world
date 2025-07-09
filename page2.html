@@ -1,4 +1,4 @@
-<!-- page2.html (Page 2) -->
+<!-- page2.html -->
 <html>
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -8,51 +8,36 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Work+Sans:wght@400;500;700;900"
     />
-    <title>Market Insights</title>
+    <title>Market Report</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="script.js" defer></script>
   </head>
   <body class="bg-white font-['Work Sans','Noto Sans',sans-serif]">
     <div class="min-h-screen flex flex-col justify-between">
       <div>
         <div class="flex justify-end p-4">
-          <button onclick="window.history.back()" class="text-[#181111] font-bold rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z" />
-            </svg>
-          </button>
+          <button onclick="window.history.back()" class="text-[#181111]">✖</button>
         </div>
-        <div id="insights-container" class="p-4">
-          <h1 class="text-[#181111] text-[22px] font-bold mb-2">Loading insights...</h1>
+
+        <h1 id="title" class="text-[#181111] text-2xl font-bold px-4 pb-2">Loading...</h1>
+        <p id="lead" class="text-[#181111] px-4 pb-4">Please wait while we generate insights.</p>
+
+        <div class="px-4 py-2">
+          <h3 class="font-bold text-lg text-[#181111]">Latest News</h3>
+          <p id="latest-news" class="text-[#181111] mt-1">...</p>
+
+          <h3 class="font-bold text-lg text-[#181111] mt-5">Regulation Snapshot</h3>
+          <p id="regulation" class="text-[#181111] mt-1">...</p>
+
+          <h3 class="font-bold text-lg text-[#181111] mt-5">Opportunity Highlight</h3>
+          <p id="opportunity" class="text-[#181111] mt-1">...</p>
         </div>
       </div>
-      <div class="border-t border-[#f5f0f0] flex justify-around py-3">
-        <button class="bg-[#f5f0f0] text-[#181111] rounded-lg px-4 py-2 font-bold">Share</button>
-        <button class="bg-[#f20c0c] text-white rounded-lg px-4 py-2 font-bold">Download PDF</button>
-      </div>
+
+      <footer class="p-4 flex justify-between">
+        <button class="bg-[#f5f0f0] text-[#181111] px-4 py-2 rounded-lg">Share</button>
+        <button class="bg-[#f20c0c] text-white px-4 py-2 rounded-lg">Download PDF</button>
+      </footer>
     </div>
-
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const country = params.get('country');
-      const container = document.getElementById('insights-container');
-
-      fetch(`/api/generate?country=${country}`)
-        .then(response => response.json())
-        .then(data => {
-          container.innerHTML = `
-            <h1 class="text-[#181111] text-[22px] font-bold mb-2">${data.title}</h1>
-            <p class="text-[#181111] mb-4">${data.lead}</p>
-
-            <h3 class="text-lg font-bold text-[#181111] mb-1">Latest News</h3>
-            <p class="mb-3">${data.latest_news}</p>
-
-            <h3 class="text-lg font-bold text-[#181111] mb-1">Regulation Snapshot</h3>
-            <p class="mb-3">${data.regulation}</p>
-
-            <h3 class="text-lg font-bold text-[#181111] mb-1">Opportunity Highlight</h3>
-            <p class="mb-3">${data.opportunity}</p>
-          `;
-        });
-    </script>
   </body>
 </html>
