@@ -1,55 +1,56 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const exploreButton = document.querySelector("button span.truncate");
-  const countrySelect = document.querySelector("select");
+// Save this as script.js in your frontend folder
 
-  if (exploreButton) {
-    exploreButton.closest("button").addEventListener("click", async () => {
-      const selectedOption = countrySelect.value;
+// Store selected country in localStorage when button is clicked
+function handleExploreClick() {
+    const selectElement = document.getElementById('country-select');
+    const selectedCountry = selectElement.value;
 
-      if (!selectedOption || selectedOption === "one") {
+    if (!selectedCountry || selectedCountry === "none") {
         alert("Please select a country.");
         return;
-      }
+    }
 
-      // Show loading state (optional)
-      exploreButton.innerText = "Loading...";
+    localStorage.setItem('selectedCountry', selectedCountry);
+    window.location.href = 'page2.html';
+}
 
-      try {
-        const response = await fetch(`/api/generate?country=${encodeURIComponent(selectedOption)}`);
+// On Page 2: Fetch AI-generated content
+async function loadAIInsights() {
+    const country = localStorage.getItem('selectedCountry');
+    if (!country) return;
+
+    // Set loading text
+    document.getElementById('title').innerText = `Loading ${country} insights...`;
+
+    try {
+        const response = await fetch('https://YOUR_BACKEND_URL/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ country: country })
+        });
+
         const data = await response.json();
 
-        if (data.result) {
-          localStorage.setItem("marketData", data.result);
-          window.location.href = "page2.html";
-        } else {
-          alert("Error: " + (data.error || "No data received."));
+        if (data.error) {
+            document.getElementById('title').innerText = "Error loading insights.";
+            console.error(data.error);
+            return;
         }
-      } catch (error) {
-        alert("Request failed. Please try again.");
-      } finally {
-        exploreButton.innerText = "Click to Explore";
-      }
-    });
-  }
 
-  // On Page2: Display results
-  if (window.location.pathname.includes("page2.html")) {
-    const container = document.querySelector("#insights-container");
-    const storedText = localStorage.getItem("marketData");
+        // Inject AI content into Page 2
+        document.getElementById('title').innerText = data.title;
+        document.getElementById('lead').innerText = data.lead;
+        document.getElementById('latest-news').innerText = data.latest_news;
+        document.getElementById('regulation').innerText = data.regulation;
+        document.getElementById('opportunity').innerText = data.opportunity;
 
-    if (container && storedText) {
-      const [overview, news, opportunities] = storedText.split(/\n(?=[(12]\))/g);
-
-      container.innerHTML = `
-        <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Overview Market</h2>
-        <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">${overview?.replace(/^\(1\)\s*/, '')}</p>
-        
-        <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Latest News</h2>
-        <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">${news?.replace(/^\(2\)\s*/, '')}</p>
-        
-        <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Export Opportunities</h2>
-        <p class="text-white text-base font-normal leading-normal pb-3 pt-1 px-4">${opportunities?.replace(/^\(3\)\s*/, '')}</p>
-      `;
+    } catch (error) {
+        console.error(error);
+        document.getElementById('title').innerText = "Failed to load insights.";
     }
-  }
-});
+}
+
+// Run the function on Page 2 load
+if (window.location.pathname.includes('page2.html')) {
+    window.onload = loadAIInsights;
+}
