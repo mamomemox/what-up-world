@@ -1,28 +1,64 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Market Insights</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <div class="app-container">
-      <div class="top-bar">
-        <button class="close-button" onclick="window.location.href='index.html'">✕</button>
-      </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Market Report</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=Work+Sans:wght@400;500;700;900&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white font-['Work Sans','Noto Sans',sans-serif] flex flex-col min-h-screen justify-between">
 
-      <div class="report-section">
-        <h1 class="title">Market Insights</h1>
-        <p class="text-center">AI-powered updates on international markets.</p>
-
-        <div id="insights-container" class="mt-4 text-left"></div>
-
-        <div class="actions">
-          <button onclick="alert('Share feature coming soon!')">Share</button>
-          <button onclick="alert('Download as PDF coming soon!')">Download PDF</button>
-        </div>
-      </div>
+  <div>
+    <div class="flex items-center p-4 pb-2 justify-end">
+      <button onclick="window.history.back()" class="text-[#181111]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+      </button>
     </div>
-  </body>
+
+    <div id="insights-container" class="px-4 pt-5">
+      <p class="text-[#181111] font-semibold">Loading insights...</p>
+    </div>
+
+    <div class="flex justify-center p-4">
+      <img src="https://source.unsplash.com/featured/?business,city" alt="Market" class="rounded-lg max-w-full"/>
+    </div>
+  </div>
+
+  <div class="flex justify-between px-4 py-3">
+    <button class="rounded-lg px-4 py-2 bg-[#f5f0f0] text-[#181111] text-sm font-bold">Share</button>
+    <button class="rounded-lg px-4 py-2 bg-[#f20c0c] text-white text-sm font-bold">Download PDF</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const params = new URLSearchParams(window.location.search);
+      const country = params.get('country');
+      const container = document.getElementById('insights-container');
+
+      if (country) {
+        fetch(`https://YOUR_RENDER_BACKEND_URL/api/generate?country=${country}`)
+          .then(res => res.json())
+          .then(data => {
+            container.innerHTML = `
+              <h1 class="text-[#181111] text-[22px] font-bold pb-3">${data.title}</h1>
+              <p class="text-[#181111] text-base pb-3">${data.lead}</p>
+              <h3 class="text-[#181111] text-lg font-bold pb-2 pt-4">Latest News</h3>
+              <p class="text-[#181111] text-base">${data.news}</p>
+              <h3 class="text-[#181111] text-lg font-bold pb-2 pt-4">Regulation Snapshot</h3>
+              <p class="text-[#181111] text-base">${data.regulation}</p>
+              <h3 class="text-[#181111] text-lg font-bold pb-2 pt-4">Opportunity Highlight</h3>
+              <p class="text-[#181111] text-base">${data.opportunity}</p>
+            `;
+          })
+          .catch(() => {
+            container.innerHTML = "<p>Failed to load insights.</p>";
+          });
+      } else {
+        container.innerHTML = "<p>No market selected.</p>";
+      }
+    });
+  </script>
+
+</body>
 </html>
