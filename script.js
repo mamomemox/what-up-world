@@ -1,54 +1,33 @@
-// script.js
-async function generateReport() {
-  const country = document.getElementById('countrySelect').value;
+function handleExploreClick() {
+  const country = document.getElementById('country-select').value;
   if (!country) {
-    alert('Please select a country.');
+    alert('Please select a country first.');
     return;
   }
+  localStorage.setItem('selectedCountry', country);
+  window.location.href = 'page2.html';
+}
 
-  const reportSection = document.getElementById('reportSection');
-  const overviewText = document.getElementById('overviewText');
-  const marketText = document.getElementById('marketText');
-  const newsText = document.getElementById('newsText');
-  const exportText = document.getElementById('exportText');
-
-  overviewText.innerText = "Generating report...";
-  marketText.innerText = "";
-  newsText.innerText = "";
-  exportText.innerText = "";
-  reportSection.classList.remove('hidden');
+async function loadInsights() {
+  const country = localStorage.getItem('selectedCountry') || 'USA';
+  const container = document.getElementById('insights-container');
+  container.innerHTML = '<p>Loading insights...</p>';
 
   try {
-    const response = await fetch(`http://127.0.0.1:8000/generate?country=${encodeURIComponent(country)}`);
+    const response = await fetch(`https://your-backend-url.onrender.com/api/generate?country=${encodeURIComponent(country)}`);
     const data = await response.json();
-
-    if (data.text) {
-      const sections = data.text.split(/\n(?=\d\.)/);
-      overviewText.innerText = `AI-powered insights about ${country}.`;
-
-      sections.forEach(section => {
-        if (section.includes('Overview Market')) {
-          marketText.innerText = section.replace(/^1\.\s*Overview Market[:\-]?\s*/i, '').trim();
-        } else if (section.includes('Latest News')) {
-          newsText.innerText = section.replace(/^2\.\s*Latest News[:\-]?\s*/i, '').trim();
-        } else if (section.includes('Export Opportunities')) {
-          exportText.innerText = section.replace(/^3\.\s*Export Opportunities[:\-]?\s*/i, '').trim();
-        }
-      });
-
+    if (data.content) {
+      container.innerHTML = formatInsights(data.content);
     } else {
-      overviewText.innerText = "No data received.";
+      container.innerHTML = '<p>Failed to load insights.</p>';
     }
   } catch (error) {
-    console.error(error);
-    overviewText.innerText = "Failed to load report.";
+    console.error('Frontend Error:', error);
+    container.innerHTML = '<p>Failed to load insights.</p>';
   }
 }
 
-function shareReport() {
-  alert('Share feature coming soon!');
-}
-
-function downloadPDF() {
-  alert('Download as PDF coming soon!');
+function formatInsights(text) {
+  const sections = text.split(/\n{2,}/);
+  return sections.map(section => `<p style="margin-bottom: 12px;">${section}</p>`).join('');
 }
