@@ -1,33 +1,27 @@
-function handleExploreClick() {
-  const country = document.getElementById('country-select').value;
-  if (!country) {
-    alert('Please select a country first.');
-    return;
-  }
-  localStorage.setItem('selectedCountry', country);
-  window.location.href = 'page2.html';
-}
-
-async function loadInsights() {
-  const country = localStorage.getItem('selectedCountry') || 'USA';
+document.addEventListener('DOMContentLoaded', function () {
+  const params = new URLSearchParams(window.location.search);
+  const country = params.get('country');
   const container = document.getElementById('insights-container');
-  container.innerHTML = '<p>Loading insights...</p>';
 
-  try {
-    const response = await fetch(`https://your-backend-url.onrender.com/api/generate?country=${encodeURIComponent(country)}`);
-    const data = await response.json();
-    if (data.content) {
-      container.innerHTML = formatInsights(data.content);
-    } else {
-      container.innerHTML = '<p>Failed to load insights.</p>';
-    }
-  } catch (error) {
-    console.error('Frontend Error:', error);
-    container.innerHTML = '<p>Failed to load insights.</p>';
+  if (country) {
+    fetch(`https://YOUR_RENDER_BACKEND_URL/api/generate?country=${country}`)
+      .then(response => response.json())
+      .then(data => {
+        container.innerHTML = `
+          <h1 class="text-[#181111] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3">${data.title}</h1>
+          <p class="text-[#181111] text-base font-normal leading-normal pb-3">${data.lead}</p>
+          <h3 class="text-[#181111] text-lg font-bold pb-2 pt-4">Latest News</h3>
+          <p class="text-[#181111] text-base">${data.news}</p>
+          <h3 class="text-[#181111] text-lg font-bold pb-2 pt-4">Regulation Snapshot</h3>
+          <p class="text-[#181111] text-base">${data.regulation}</p>
+          <h3 class="text-[#181111] text-lg font-bold pb-2 pt-4">Opportunity Highlight</h3>
+          <p class="text-[#181111] text-base">${data.opportunity}</p>
+        `;
+      })
+      .catch(() => {
+        container.innerHTML = "<p>Failed to load insights.</p>";
+      });
+  } else {
+    container.innerHTML = "<p>No market selected.</p>";
   }
-}
-
-function formatInsights(text) {
-  const sections = text.split(/\n{2,}/);
-  return sections.map(section => `<p style="margin-bottom: 12px;">${section}</p>`).join('');
-}
+});
