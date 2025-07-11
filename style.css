@@ -1,78 +1,104 @@
-
+/* style.css */
 body {
-    margin: 0;
-    font-family: Manrope, 'Noto Sans', sans-serif;
-    background-color: #131712;
-    color: white;
+  margin: 0;
+  font-family: Manrope, 'Noto Sans', sans-serif;
+  background-color: #131712;
+  color: white;
 }
+
 .app-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
 }
+
 .top-bar {
-    padding: 1rem;
-    display: flex;
-    justify-content: flex-end;
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
 }
+
 .close-button {
-    background: transparent;
-    color: white;
-    border: none;
-    font-size: 1.5rem;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
+
 .title {
-    text-align: center;
-    padding-top: 1rem;
-    font-size: 1.75rem;
-    font-weight: bold;
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 1.75rem;
+  font-weight: bold;
 }
+
+.text-center {
+  text-align: center;
+}
+
 .explore-button-container, .country-select-container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
+
 .explore-button {
-    background-color: #50d22c;
-    color: #131712;
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    border: none;
-    font-weight: bold;
+  background-color: #50d22c;
+  color: #131712;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
 }
+
 .country-select-container select {
-    background-color: #1f251d;
-    color: white;
-    padding: 0.75rem;
-    border-radius: 10px;
-    border: 1px solid #42513e;
+  background-color: #1f251d;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #42513e;
 }
+
 .report-section {
-    padding: 1rem;
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-top: 2rem;
 }
+
 .report-section.hidden {
-    display: none;
+  display: none;
 }
+
 .report-section h1, .report-section h2 {
-    font-weight: bold;
+  font-weight: bold;
 }
+
 .actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
+
 .actions button {
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    border: none;
-    font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
 }
+
 .actions button:first-child {
-    background-color: #2e352c;
-    color: white;
+  background-color: #2e352c;
+  color: white;
 }
+
 .actions button:last-child {
-    background-color: #8cd279;
-    color: #131612;
+  background-color: #8cd279;
+  color: #131612;
 }
