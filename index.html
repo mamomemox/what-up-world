@@ -26,7 +26,7 @@
         </div>
 
         <div class="flex justify-center">
-          <button id="explore-btn" class="bg-[#f20c0c] text-white px-6 py-3 rounded-lg font-bold text-base">
+          <button id="explore-btn" onclick="handleExplore()" class="bg-[#f20c0c] text-white px-6 py-3 rounded-lg font-bold text-base">
             Click to Explore
           </button>
         </div>
@@ -42,55 +42,21 @@
     </div>
 
     <script>
-      const backendURL = "https://what-up-world-1.onrender.com/api/generate";
-
       function handleExplore() {
         const select = document.getElementById("country-select");
         const selectedCountry = select.value;
-        
-        console.log("Selected country:", selectedCountry);
         
         if (!selectedCountry) {
           alert("Please select a country first!");
           return;
         }
         
-        // Show loading state
         const button = document.getElementById('explore-btn');
         button.textContent = "Loading...";
         button.disabled = true;
         
         window.location.href = `page2.html?country=${encodeURIComponent(selectedCountry)}`;
       }
-
-      // Event listeners
-      document.getElementById('explore-btn').addEventListener('click', handleExplore);
-      
-      // Enter key support
-      document.getElementById('country-select').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          handleExplore();
-        }
-      });
-
-      // Auto-enable button when country is selected
-      document.getElementById('country-select').addEventListener('change', function() {
-        const button = document.getElementById('explore-btn');
-        if (this.value) {
-          button.style.opacity = '1';
-          button.style.cursor = 'pointer';
-        } else {
-          button.style.opacity = '0.7';
-          button.style.cursor = 'not-allowed';
-        }
-      });
-
-      // Initialize button state
-      document.addEventListener('DOMContentLoaded', function() {
-        const button = document.getElementById('explore-btn');
-        button.style.opacity = '0.7';
-        button.style.cursor = 'not-allowed';
-      });
     </script>
   </body>
 </html>
