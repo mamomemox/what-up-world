@@ -3,10 +3,19 @@ const backendURL = "https://what-up-world-1.onrender.com/api/generate";
 function handleExplore() {
   const select = document.getElementById("country-select");
   const selectedCountry = select.value;
+  
+  console.log("Selected country:", selectedCountry); // Debug
+  
   if (!selectedCountry) {
-    alert("Please select a country.");
+    alert("Please select a country first!");
     return;
   }
+  
+  // Show loading state
+  const button = document.querySelector('button[onclick="handleExplore()"]');
+  button.textContent = "Loading...";
+  button.disabled = true;
+  
   window.location.href = `page2.html?country=${encodeURIComponent(selectedCountry)}`;
 }
 
@@ -39,6 +48,8 @@ window.onload = async () => {
 
   if (country && container) {
     try {
+      console.log("Loading insights for:", country); // Debug
+      
       const response = await fetch(`${backendURL}?country=${country}`);
       
       if (!response.ok) {
@@ -46,6 +57,7 @@ window.onload = async () => {
       }
       
       const data = await response.json();
+      console.log("Received data:", data); // Debug
       
       // Check if we got HTML content (from n8n) or plain text
       if (data.html) {
