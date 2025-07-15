@@ -6,7 +6,6 @@
     <title>Market Insights</title>
     <link rel="stylesheet" href="static/style.css" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="static/script.js" defer></script>
   </head>
   <body class="bg-white font-sans">
     <div class="min-h-screen flex flex-col justify-between">
@@ -14,19 +13,22 @@
       <div class="p-4">
         <h1 class="text-center text-[#181111] text-[22px] font-bold pb-5">What's up in my target market today?</h1>
 
-        <div class="flex justify-center">
-          <button onclick="handleExplore()" class="bg-[#f20c0c] text-white px-6 py-3 rounded-lg font-bold text-base">
-            Click to Explore
-          </button>
-        </div>
-
-        <div class="flex justify-center mt-6">
-          <select id="country-select" class="border border-[#e6dbdb] rounded-lg h-12 px-4 text-[#181111]">
+        <div class="flex justify-center mb-6">
+          <select id="country-select" class="border border-[#e6dbdb] rounded-lg h-12 px-4 text-[#181111] w-64">
             <option value="">Select Country</option>
             <option value="Germany">Germany</option>
             <option value="USA">USA</option>
             <option value="China">China</option>
+            <option value="Japan">Japan</option>
+            <option value="France">France</option>
+            <option value="UK">UK</option>
           </select>
+        </div>
+
+        <div class="flex justify-center">
+          <button id="explore-btn" class="bg-[#f20c0c] text-white px-6 py-3 rounded-lg font-bold text-base">
+            Click to Explore
+          </button>
         </div>
       </div>
 
@@ -38,5 +40,57 @@
       </div>
 
     </div>
+
+    <script>
+      const backendURL = "https://what-up-world-1.onrender.com/api/generate";
+
+      function handleExplore() {
+        const select = document.getElementById("country-select");
+        const selectedCountry = select.value;
+        
+        console.log("Selected country:", selectedCountry);
+        
+        if (!selectedCountry) {
+          alert("Please select a country first!");
+          return;
+        }
+        
+        // Show loading state
+        const button = document.getElementById('explore-btn');
+        button.textContent = "Loading...";
+        button.disabled = true;
+        
+        window.location.href = `page2.html?country=${encodeURIComponent(selectedCountry)}`;
+      }
+
+      // Event listeners
+      document.getElementById('explore-btn').addEventListener('click', handleExplore);
+      
+      // Enter key support
+      document.getElementById('country-select').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          handleExplore();
+        }
+      });
+
+      // Auto-enable button when country is selected
+      document.getElementById('country-select').addEventListener('change', function() {
+        const button = document.getElementById('explore-btn');
+        if (this.value) {
+          button.style.opacity = '1';
+          button.style.cursor = 'pointer';
+        } else {
+          button.style.opacity = '0.7';
+          button.style.cursor = 'not-allowed';
+        }
+      });
+
+      // Initialize button state
+      document.addEventListener('DOMContentLoaded', function() {
+        const button = document.getElementById('explore-btn');
+        button.style.opacity = '0.7';
+        button.style.cursor = 'not-allowed';
+      });
+    </script>
   </body>
 </html>
